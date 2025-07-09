@@ -1,0 +1,9 @@
+Race,LapNumber,Driver,Time
+Race1,1,DriverA,60.5
+Race1,2,DriverA,59.8
+Race1,1,DriverB,62.0
+Race1,2,DriverB,61.5
+Race2,1,DriverA,61.0
+Race2,2,DriverA,60.9
+Race2,1,DriverB,63.2
+Race2,2,DriverB,62.4
