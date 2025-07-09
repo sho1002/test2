@@ -1,6 +1,7 @@
 import csv
 from statistics import mean
 import argparse
+import matplotlib.pyplot as plt
 
 
 def parse_csv(filepath):
@@ -36,6 +37,28 @@ def fastest_lap_by_race(rows):
     return fastest
 
 
+def plot_results(avg_times, fastest):
+    """Display analysis results using matplotlib graphs."""
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+
+    # Plot average lap time per driver
+    drivers = list(avg_times.keys())
+    avg_values = [avg_times[d] for d in drivers]
+    axes[0].bar(drivers, avg_values, color="skyblue")
+    axes[0].set_title("Average Lap Time by Driver")
+    axes[0].set_ylabel("Seconds")
+
+    # Plot fastest lap per race
+    races = list(fastest.keys())
+    fast_values = [fastest[r]["Time"] for r in races]
+    axes[1].bar(races, fast_values, color="lightgreen")
+    axes[1].set_title("Fastest Lap by Race")
+    axes[1].set_ylabel("Seconds")
+
+    plt.tight_layout()
+    plt.show()
+
+
 def main():
     parser = argparse.ArgumentParser(description='Race data analysis tool')
     parser.add_argument('csvfile', help='CSV file containing race data')
@@ -52,6 +75,8 @@ def main():
     print('\nFastest lap by race:')
     for race, info in fastest.items():
         print(f"{race}: Driver {info['Driver']} Lap {info['LapNumber']} - {info['Time']} sec")
+
+    plot_results(avg_times, fastest)
 
 
 if __name__ == '__main__':
